@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amul Vidya — Gyan ka Bharosa</title>
+  <meta name="description" content="Amul Vidya — Gyan ka Bharosa. Learn with immersive lessons, demo videos, interactive quizzes and flexible subscriptions." />
+  <meta name="theme-color" content="#070b1a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+Devanagari:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ============ LOADER ============ -->
+  <div id="loader">
+    <div class="intro-cols"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="intro-grid"></div>
+    <div class="intro-top">
+      <span>Amul Vidya ©</span>
+      <span class="intro-status" id="introStatus">Preparing knowledge</span>
+      <span>Est. Bharat</span>
+    </div>
+    <div class="intro-center">
+      <svg class="intro-logo" viewBox="0 0 40 40" aria-hidden="true">
+        <path class="il-draw" d="M6 10 Q20 4 20 12 Q20 4 34 10 V32 Q20 26 20 32 Q20 26 6 32 Z" fill="none" stroke="url(#ilg)" stroke-width="1.4" stroke-linejoin="round"/>
+        <path class="il-draw" d="M20 12 V32" stroke="url(#ilg)" stroke-width="1.4"/>
+        <defs><linearGradient id="ilg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset=".6" stop-color="#ff7a3d"/><stop offset="1" stop-color="#ff5c8a"/></linearGradient></defs>
+      </svg>
+      <h2 class="intro-word" aria-label="Amul Vidya">
+        <span class="iw">A</span><span class="iw">m</span><span class="iw">u</span><span class="iw">l</span><span class="iw sp">&nbsp;</span><span class="iw g">V</span><span class="iw g">i</span><span class="iw g">d</span><span class="iw g">y</span><span class="iw g">a</span>
+      </h2>
+      <p class="intro-tag"><span>ज्ञान का भरोसा</span><em>Gyan ka Bharosa</em></p>
+    </div>
+    <div class="intro-bottom">
+      <div class="intro-count"><span id="introCount">000</span><small>%</small></div>
+      <div class="intro-line"><i id="introLine"></i></div>
+    </div>
+  </div>
+
+  <!-- 3D background canvas -->
+  <canvas id="bg3d"></canvas>
+  <div class="noise"></div>
+  <div id="scroll-progress"></div>
+  <div id="cursor-glow"></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <a href="#top" class="logo">
+      <span class="logo-mark">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 10 Q20 4 20 12 Q20 4 34 10 V32 Q20 26 20 32 Q20 26 6 32 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M20 12 V32" stroke="currentColor" stroke-width="2.4"/></svg>
+      </span>
+      <span class="logo-text">Amul <b>Vidya</b></span>
+    </a>
+    <nav class="nav-links" id="navLinks" data-lenis-prevent>
+      <a href="#features">Features</a>
+      <a href="#book">Library</a>
+      <a href="#devices">App</a>
+      <a href="#demos">Demos</a>
+      <a href="#quiz">Quizzes</a>
+      <a href="#pricing">Pricing</a>
+      <div class="nav-mobile-actions">
+        <button class="btn btn-ghost" data-auth="login">Log in</button>
+        <button class="btn btn-ghost" data-auth="signup">Sign up</button>
+        <button class="btn btn-primary" data-trial>Free Trial</button>
+      </div>
+    </nav>
+    <div class="nav-actions" id="navActions">
+      <span class="trial-badge" id="trialBadge" hidden>✦ Trial active</span>
+      <button class="btn btn-link" data-auth="login">Log in</button>
+      <button class="btn btn-ghost" data-auth="signup">Sign up</button>
+      <button class="btn btn-primary magnetic" data-trial>Free Trial</button>
+    </div>
+    <div class="nav-user" id="navUser" hidden>
+      <span class="avatar" id="userAvatar">A</span>
+      <span id="userName">Student</span>
+      <button class="btn btn-link" id="logoutBtn">Log out</button>
+    </div>
+    <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span></button>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="hero-inner">
+        <div class="eyebrow reveal"><span class="dot"></span> India's most trusted way to learn</div>
+        <h1 class="hero-title">
+          <span class="line"><span class="split">Amul</span></span>
+          <span class="line"><span class="split grad">Vidya</span></span>
+        </h1>
+        <p class="hero-tag reveal">
+          <span class="hi">ज्ञान का भरोसा</span>
+          <span class="sep"></span>
+          <span class="en">Gyan ka Bharosa</span>
+        </p>
+        <p class="hero-sub reveal">Animated lessons, live demo classes and smart quizzes for every class, every exam and every dream. Start learning in one click, no signup needed.</p>
+        <div class="hero-cta reveal">
+          <button class="btn btn-primary btn-lg magnetic" data-trial>
+            Start Free Trial <span class="arrow">→</span>
+          </button>
+          <a href="#demos" class="btn btn-glass btn-lg magnetic">
+            <span class="play-ico">▶</span> Watch Demo
+          </a>
+        </div>
+        <p class="hero-note reveal">No card · No signup · Instant access</p>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat glass reveal"><b data-count="2.4" data-suffix="M+" data-decimals="1">0</b><span>Learners</span></div>
+        <div class="stat glass reveal"><b data-count="18000" data-suffix="+">0</b><span>Video lessons</span></div>
+        <div class="stat glass reveal"><b data-count="4.9" data-suffix="★" data-decimals="1">0</b><span>Avg rating</span></div>
+      </div>
+
+      <div class="scroll-hint"><span>Scroll</span><i></i></div>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <section class="marquee">
+      <div class="marquee-track">
+        <span>Mathematics</span><i>✦</i><span>Physics</span><i>✦</i><span>Chemistry</span><i>✦</i><span>Biology</span><i>✦</i><span>English</span><i>✦</i><span>हिन्दी</span><i>✦</i><span>History</span><i>✦</i><span>Coding</span><i>✦</i><span>JEE</span><i>✦</i><span>NEET</span><i>✦</i><span>UPSC</span><i>✦</i><span>Board Exams</span><i>✦</i>
+        <span>Mathematics</span><i>✦</i><span>Physics</span><i>✦</i><span>Chemistry</span><i>✦</i><span>Biology</span><i>✦</i><span>English</span><i>✦</i><span>हिन्दी</span><i>✦</i><span>History</span><i>✦</i><span>Coding</span><i>✦</i><span>JEE</span><i>✦</i><span>NEET</span><i>✦</i><span>UPSC</span><i>✦</i><span>Board Exams</span><i>✦</i>
+      </div>
+    </section>
+
+    <!-- ============ MANIFESTO (words light up on scroll) ============ -->
+    <section class="manifesto" id="manifesto">
+      <span class="kicker">Our promise</span>
+      <p class="manifesto-text" id="manifestoText">Every child in Bharat deserves knowledge they can trust. Amul Vidya turns textbooks into experiences, doubts into discoveries and practice into progress. Not just lessons, but <b>ज्ञान का भरोसा</b>, the confidence that what you learn will carry you all the way.</p>
+    </section>
+
+    <!-- ============ FEATURES ============ -->
+    <section class="section features" id="features">
+      <div class="section-head">
+        <span class="kicker">Why Amul Vidya</span>
+        <h2 class="big-title">Learning that feels like <em>magic</em>, built on <em>trust</em>.</h2>
+      </div>
+      <div class="feature-grid">
+        <article class="feature tilt glass">
+          <div class="f-ico">🎬</div>
+          <h3>Cinematic lessons</h3>
+          <p>3D-animated explanations that turn tough concepts into moments you remember.</p>
+          <div class="f-shine"></div>
+        </article>
+        <article class="feature tilt glass">
+          <div class="f-ico">🧠</div>
+          <h3>Smart quizzes</h3>
+          <p>MCQ, true/false, fill-in-the-blank, match-up and rapid-fire. Practice the way you like.</p>
+          <div class="f-shine"></div>
+        </article>
+        <article class="feature tilt glass">
+          <div class="f-ico">📚</div>
+          <h3>Digital library</h3>
+          <p>Notes, e-books and solved papers for every board and competitive exam.</p>
+          <div class="f-shine"></div>
+        </article>
+        <article class="feature tilt glass">
+          <div class="f-ico">📈</div>
+          <h3>Progress tracking</h3>
+          <p>Personal dashboards that show strengths, gaps and what to study next.</p>
+          <div class="f-shine"></div>
+        </article>
+        <article class="feature tilt glass">
+          <div class="f-ico">👩‍🏫</div>
+          <h3>Expert mentors</h3>
+          <p>Learn from India's best teachers, with doubt-solving whenever you're stuck.</p>
+          <div class="f-shine"></div>
+        </article>
+        <article class="feature tilt glass">
+          <div class="f-ico">📱</div>
+          <h3>Any device</h3>
+          <p>Laptop, tablet or phone. Your progress syncs everywhere, even on slow networks.</p>
+          <div class="f-shine"></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ BOOK FLIP (pinned) ============ -->
+    <section class="book-section" id="book">
+      <div class="book-stage">
+        <div class="book-copy">
+          <span class="kicker">The Book of Gyan</span>
+          <h2 class="big-title">Scroll to turn <br/>the pages.</h2>
+          <p>Every subject is a chapter. Every chapter is a journey.</p>
+          <div class="book-progress"><i id="bookProgress"></i></div>
+        </div>
+
+        <div class="book-wrap">
+          <div class="book" id="flipBook">
+            <!-- page 1: cover -->
+            <div class="page">
+              <div class="face front cover">
+                <div class="cover-inner">
+                  <div class="cover-emblem">
+                    <svg viewBox="0 0 40 40"><path d="M6 10 Q20 4 20 12 Q20 4 34 10 V32 Q20 26 20 32 Q20 26 6 32 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M20 12 V32" stroke="currentColor" stroke-width="1.8"/></svg>
+                  </div>
+                  <h3>Amul Vidya</h3>
+                  <p class="dev">ज्ञान का भरोसा</p>
+                  <span class="cover-line"></span>
+                  <p class="cover-sub">The Book of Gyan · Vol. I</p>
+                </div>
+              </div>
+              <div class="face back paper">
+                <div class="pg">
+                  <span class="chap">Chapter 01</span>
+                  <h4>Mathematics</h4>
+                  <p>From number sense to calculus, see every formula come alive in 3D.</p>
+                  <div class="math-viz">
+                    <svg viewBox="0 0 200 100"><path class="draw" d="M0 80 Q50 -10 100 50 T200 20" fill="none" stroke="#c8892b" stroke-width="2.5"/><line x1="0" y1="90" x2="200" y2="90" stroke="#7a6a55" stroke-width="1"/><line x1="10" y1="0" x2="10" y2="100" stroke="#7a6a55" stroke-width="1"/></svg>
+                  </div>
+                  <span class="pnum">1</span>
+                </div>
+              </div>
+            </div>
+            <!-- page 2 -->
+            <div class="page">
+              <div class="face front paper">
+                <div class="pg">
+                  <p class="formula">e<sup>iπ</sup> + 1 = 0</p>
+                  <ul class="pg-list"><li>Algebra &amp; Geometry</li><li>Trigonometry</li><li>Calculus</li><li>Statistics</li></ul>
+                  <span class="pnum">2</span>
+                </div>
+              </div>
+              <div class="face back paper">
+                <div class="pg">
+                  <span class="chap">Chapter 02</span>
+                  <h4>Science</h4>
+                  <p>Atoms, cells, forces and galaxies, explored through interactive simulations.</p>
+                  <div class="atom-viz"><i></i><i></i><i></i><b></b></div>
+                  <span class="pnum">3</span>
+                </div>
+              </div>
+            </div>
+            <!-- page 3 -->
+            <div class="page">
+              <div class="face front paper">
+                <div class="pg">
+                  <p class="formula">E = mc²</p>
+                  <ul class="pg-list"><li>Physics</li><li>Chemistry</li><li>Biology</li><li>Lab simulations</li></ul>
+                  <span class="pnum">4</span>
+                </div>
+              </div>
+              <div class="face back paper">
+                <div class="pg">
+                  <span class="chap">Chapter 03</span>
+                  <h4>Languages</h4>
+                  <p class="dev big">क ख ग · A B C</p>
+                  <p>Hindi, English and Sanskrit, taught through stories, grammar games and speaking practice.</p>
+                  <span class="pnum">5</span>
+                </div>
+              </div>
+            </div>
+            <!-- page 4 -->
+            <div class="page">
+              <div class="face front paper">
+                <div class="pg">
+                  <p class="quote">“विद्या ददाति विनयं”</p>
+                  <p class="muted">Knowledge gives humility.</p>
+                  <ul class="pg-list"><li>Grammar</li><li>Literature</li><li>Writing skills</li></ul>
+                  <span class="pnum">6</span>
+                </div>
+              </div>
+              <div class="face back paper">
+                <div class="pg">
+                  <span class="chap">Chapter 04</span>
+                  <h4>Exam Prep</h4>
+                  <p>JEE · NEET · UPSC · Boards. Mock tests, previous-year papers and an all-India rank.</p>
+                  <div class="bars"><i style="--h:40%"></i><i style="--h:65%"></i><i style="--h:55%"></i><i style="--h:85%"></i><i style="--h:95%"></i></div>
+                  <span class="pnum">7</span>
+                </div>
+              </div>
+            </div>
+            <!-- page 5: back cover -->
+            <div class="page">
+              <div class="face front paper">
+                <div class="pg center">
+                  <h4>Your chapter<br/>starts now.</h4>
+                  <p>Open every page free for 7 days.</p>
+                  <button class="btn btn-primary" data-trial>Start Free Trial</button>
+                  <span class="pnum">8</span>
+                </div>
+              </div>
+              <div class="face back cover">
+                <div class="cover-inner"><p class="cover-sub">Gyan ka Bharosa</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="book-shadow"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DEVICES ============ -->
+    <section class="section devices" id="devices">
+      <div class="section-head center">
+        <span class="kicker">One app · Every screen</span>
+        <h2 class="big-title">Learn on your <em>laptop</em>.<br/>Revise on your <em>phone</em>.</h2>
+      </div>
+      <div class="device-stage">
+        <div class="laptop" id="laptop">
+          <div class="laptop-lid">
+            <div class="laptop-screen">
+              <div class="ui">
+                <div class="ui-side">
+                  <span class="ui-logo"></span>
+                  <i class="on"></i><i></i><i></i><i></i>
+                </div>
+                <div class="ui-main">
+                  <div class="ui-top"><span>Namaste, Aarav 👋</span><em>🔥 12-day streak</em></div>
+                  <div class="ui-video">
+                    <div class="ui-play">▶</div>
+                    <div class="ui-orbit"><b></b><i></i><i></i></div>
+                    <span class="ui-caption">Physics · Laws of Motion</span>
+                  </div>
+                  <div class="ui-cards">
+                    <div><small>Maths</small><span class="ring" style="--p:78"></span></div>
+                    <div><small>Science</small><span class="ring" style="--p:64"></span></div>
+                    <div><small>English</small><span class="ring" style="--p:91"></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="laptop-base"><span></span></div>
+        </div>
+
+        <div class="phone" id="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="ps-head"><span>Daily Quiz</span><em>Q 3/10</em></div>
+            <div class="ps-q">Which planet is known as the Red Planet?</div>
+            <div class="ps-opt">Venus</div>
+            <div class="ps-opt ok">Mars ✓</div>
+            <div class="ps-opt">Jupiter</div>
+            <div class="ps-opt">Saturn</div>
+            <div class="ps-bar"><i></i></div>
+            <div class="ps-xp">+20 XP</div>
+          </div>
+        </div>
+
+        <div class="float-chip c1 glass">✓ Doubt solved in 2 min</div>
+        <div class="float-chip c2 glass">🏆 Rank #128 · All India</div>
+        <div class="float-chip c3 glass">📶 Works offline</div>
+      </div>
+    </section>
+
+    <!-- ============ DEMOS ============ -->
+    <section class="section demos" id="demos">
+      <div class="section-head">
+        <span class="kicker">Free demo classes</span>
+        <h2 class="big-title">Watch before you <em>commit</em>.</h2>
+        <p class="lead">Try real lessons from our top teachers. Free demos open instantly. Premium demos unlock with the free trial.</p>
+      </div>
+      <div class="demo-filters" id="demoFilters">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="maths">Maths</button>
+        <button class="chip" data-filter="science">Science</button>
+        <button class="chip" data-filter="language">Languages</button>
+        <button class="chip" data-filter="exam">Exam Prep</button>
+      </div>
+      <div class="demo-grid" id="demoGrid"><!-- filled by JS --></div>
+    </section>
+
+    <!-- ============ QUIZ ARENA ============ -->
+    <section class="section quiz" id="quiz">
+      <div class="section-head center">
+        <span class="kicker">Quiz Arena</span>
+        <h2 class="big-title">Five ways to <em>test</em> yourself.</h2>
+        <p class="lead">Pick a format and play. No login needed.</p>
+      </div>
+      <div class="quiz-tabs" id="quizTabs">
+        <button class="qtab active" data-type="mcq"><span>🎯</span>Multiple Choice</button>
+        <button class="qtab" data-type="tf"><span>⚖️</span>True / False</button>
+        <button class="qtab" data-type="fill"><span>✍️</span>Fill the Blank</button>
+        <button class="qtab" data-type="match"><span>🔗</span>Match Up</button>
+        <button class="qtab" data-type="rapid"><span>⚡</span>Rapid Fire</button>
+      </div>
+      <div class="quiz-card glass" id="quizCard"><!-- filled by JS --></div>
+    </section>
+
+    <!-- ============ PRICING ============ -->
+    <section class="section pricing" id="pricing">
+      <div class="section-head center">
+        <span class="kicker">Subscriptions</span>
+        <h2 class="big-title">Plans for every <em>dream</em>.</h2>
+        <div class="billing-toggle">
+          <span class="bt-label active" data-bill="monthly">Monthly</span>
+          <button class="switch" id="billSwitch" aria-label="Toggle yearly billing"><i></i></button>
+          <span class="bt-label" data-bill="yearly">Yearly <em>Save 40%</em></span>
+        </div>
+      </div>
+      <div class="price-grid">
+        <div class="price-card glass tilt">
+          <h3>Free Demo</h3>
+          <p class="p-desc">Explore with zero commitment.</p>
+          <div class="price"><span class="cur">₹</span><b>0</b><small>/forever</small></div>
+          <ul>
+            <li>10 free demo lessons</li>
+            <li>Daily quiz challenge</li>
+            <li>Sample notes &amp; e-books</li>
+            <li class="no">Mock tests</li>
+            <li class="no">Doubt solving</li>
+          </ul>
+          <button class="btn btn-ghost full" data-trial>Try without signup</button>
+        </div>
+        <div class="price-card glass tilt featured">
+          <div class="ribbon">Most popular</div>
+          <h3>Vidya Pro</h3>
+          <p class="p-desc">Everything for one class or exam.</p>
+          <div class="price"><span class="cur">₹</span><b data-monthly="299" data-yearly="179">299</b><small>/month</small></div>
+          <ul>
+            <li>Full video library</li>
+            <li>All 5 quiz formats, unlimited</li>
+            <li>Weekly mock tests</li>
+            <li>Downloadable notes</li>
+            <li>Doubt solving (24 h)</li>
+          </ul>
+          <button class="btn btn-primary full" data-plan="Vidya Pro">Get Pro</button>
+        </div>
+        <div class="price-card glass tilt">
+          <h3>Vidya Elite</h3>
+          <p class="p-desc">For toppers who want it all.</p>
+          <div class="price"><span class="cur">₹</span><b data-monthly="699" data-yearly="419">699</b><small>/month</small></div>
+          <ul>
+            <li>Everything in Pro</li>
+            <li>All classes &amp; exams</li>
+            <li>1-on-1 mentor sessions</li>
+            <li>Live doubt solving (instant)</li>
+            <li>All-India rank analytics</li>
+          </ul>
+          <button class="btn btn-ghost full" data-plan="Vidya Elite">Go Elite</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS ============ -->
+    <section class="section voices" id="voices">
+      <div class="section-head">
+        <span class="kicker">Bharosa, in their words</span>
+        <h2 class="big-title">Loved by learners <em>across India</em>.</h2>
+      </div>
+      <div class="voice-track" id="voiceTrack">
+        <figure class="voice glass"><p>“The 3D physics lessons finally made rotational motion click for me. Scored 96 in boards!”</p><figcaption><span class="av" style="--c:#f5b942">P</span>Priya · Class 12, Jaipur</figcaption></figure>
+        <figure class="voice glass"><p>“Rapid-fire quizzes every morning on my phone. My speed in mock tests doubled.”</p><figcaption><span class="av" style="--c:#3de0c5">R</span>Rohan · JEE aspirant, Patna</figcaption></figure>
+        <figure class="voice glass"><p>“I tried the free demo without signing up. Took the subscription the same day.”</p><figcaption><span class="av" style="--c:#ff7a3d">S</span>Sneha · NEET, Pune</figcaption></figure>
+        <figure class="voice glass"><p>“As a parent, the progress dashboard shows me exactly where my son needs help.”</p><figcaption><span class="av" style="--c:#9b8cff">M</span>Meena · Parent, Lucknow</figcaption></figure>
+        <figure class="voice glass"><p>“Hindi grammar through stories. My daughter actually asks for more lessons now!”</p><figcaption><span class="av" style="--c:#ff5c8a">A</span>Anil · Parent, Bhopal</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA ============ -->
+    <section class="section final-cta">
+      <div class="cta-box glass">
+        <h2 class="big-title">Gyan ka <em>Bharosa</em>,<br/>one click away.</h2>
+        <p class="lead">Start your 7-day free trial now. No signup, no card, no catch.</p>
+        <div class="hero-cta">
+          <button class="btn btn-primary btn-lg magnetic" data-trial>Start Free Trial <span class="arrow">→</span></button>
+          <button class="btn btn-glass btn-lg magnetic" data-auth="signup">Create account</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="f-top">
+      <div>
+        <a href="#top" class="logo"><span class="logo-mark"><svg viewBox="0 0 40 40"><path d="M6 10 Q20 4 20 12 Q20 4 34 10 V32 Q20 26 20 32 Q20 26 6 32 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M20 12 V32" stroke="currentColor" stroke-width="2.4"/></svg></span><span class="logo-text">Amul <b>Vidya</b></span></a>
+        <p class="f-tag">ज्ञान का भरोसा · Gyan ka Bharosa</p>
+      </div>
+      <div class="f-cols">
+        <div><h5>Learn</h5><a href="#demos">Demo classes</a><a href="#quiz">Quizzes</a><a href="#book">Library</a></div>
+        <div><h5>Company</h5><a href="#">About</a><a href="#">Teachers</a><a href="#">Careers</a></div>
+        <div><h5>Help</h5><a href="#">Support</a><a href="#">Privacy</a><a href="#">Terms</a></div>
+      </div>
+    </div>
+    <div class="f-mega" aria-hidden="true">Amul <span class="fm-v">Vidya</span></div>
+    <div class="f-bottom">© <span id="year"></span> Amul Vidya. All rights reserved.</div>
+  </footer>
+
+  <!-- ============ MODALS ============ -->
+  <div class="modal" id="authModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close></div>
+    <div data-lenis-prevent class="modal-box glass auth-box">
+      <button class="modal-x" data-close aria-label="Close">×</button>
+      <div class="auth-tabs">
+        <button class="atab active" data-tab="login">Log in</button>
+        <button class="atab" data-tab="signup">Sign up</button>
+        <i class="atab-ink"></i>
+      </div>
+      <form class="auth-form" id="loginForm" data-form="login" novalidate>
+        <h3>Welcome back 👋</h3>
+        <label>Email or phone<input type="text" name="id" placeholder="you@example.com" required /></label>
+        <label>Password<input type="password" name="pw" placeholder="••••••••" required minlength="6" /></label>
+        <p class="form-err"></p>
+        <button class="btn btn-primary full" type="submit">Log in</button>
+        <p class="alt">No account? <a href="#" data-switch="signup">Sign up free</a></p>
+      </form>
+      <form class="auth-form" id="signupForm" data-form="signup" hidden novalidate>
+        <h3>Start your journey ✨</h3>
+        <label>Full name<input type="text" name="name" placeholder="Aarav Sharma" required /></label>
+        <label>Email or phone<input type="text" name="id" placeholder="you@example.com" required /></label>
+        <label>Class / Exam
+          <select name="grade">
+            <option>Class 6–8</option><option>Class 9–10</option><option selected>Class 11–12</option><option>JEE</option><option>NEET</option><option>UPSC</option>
+          </select>
+        </label>
+        <label>Password<input type="password" name="pw" placeholder="Min 6 characters" required minlength="6" /></label>
+        <p class="form-err"></p>
+        <button class="btn btn-primary full" type="submit">Create account</button>
+        <div class="or"><span>or</span></div>
+        <button class="btn btn-ghost full" type="button" data-trial>Continue as guest (free trial)</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="videoModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close></div>
+    <div data-lenis-prevent class="modal-box video-box">
+      <button class="modal-x" data-close aria-label="Close">×</button>
+      <div class="video-frame">
+        <video id="demoVideo" controls playsinline></video>
+        <div class="video-fallback" id="videoFallback" hidden>
+          <div class="vf-anim"><i></i><i></i><i></i><b></b></div>
+          <h4 id="vfTitle">Demo lesson</h4>
+          <p>Demo video coming soon. Put your file at <code id="vfPath">videos/demo.mp4</code></p>
+        </div>
+      </div>
+      <div class="video-meta"><h4 id="videoTitle"></h4><span id="videoTeacher"></span></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- Libraries (pinned versions) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="js/scene.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
